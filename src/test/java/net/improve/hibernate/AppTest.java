@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.hibernate.Session;
@@ -54,7 +56,6 @@ public class AppTest
     	session.beginTransaction();
     	User user = new User();
     	
-    	user.setUserId(2);
     	user.setUsername("Mukesh");
     	user.setCreatedBy("Google");
     	user.setCreatedDate(new Date());
@@ -73,7 +74,18 @@ public class AppTest
     	user.setStringLob(imageBase64String);
     	user.setCharArr(imageBase64String.toCharArray());
     	user.setNclob(NClobProxy.generateProxy(jpText));
-    	Integer userId = (Integer) session.save(user);
+
+        TimeZone.setDefault( TimeZone.getTimeZone( "UTC" ) );
+
+    	//Date
+    	user.setDate1(new Date());
+    	user.setDate2(new Date());
+    	user.setDate3(new Date());
+    	
+    	user.setNumber(11);
+    	
+    	//user.setUuid(UUID.randomUUID());
+    	String userId = (String) session.save(user);
     	session.getTransaction().commit();
     	
     	User u = (User) session.get(User.class, userId);

@@ -12,6 +12,6 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hbm2ddl.auto">create</property>
-		<mapping class="com.test.hibernate.User"/>
+		<mapping class="net.improve.hibernate.User"/>
     </session-factory>
 </hibernate-configuration>
